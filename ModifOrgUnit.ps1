@@ -1,6 +1,5 @@
 
 
-
 $UserList = @(
     @{ ID=1; Name="AAA"; Group="GMSI2020"; OrgUnit="fr.cesi.gmsi" },
     @{ ID=2; Name="BBB"; Group="GMSI2020"; OrgUnit="fr.cesi.gmsi" },
@@ -13,22 +12,11 @@ $UserList = @(
 )
 
 
-
-$UniqueUserGroups = $UserList `
-    | % { $_.Group } `
-    | Select-Object -Unique
-
-
-$GroupUserList = @{ }
-
-$UniqueUserGroups | % {
-    $GroupName = $_
-    $uniqueGroupUserList = ( $UserList | ? {$GroupName -eq  $_.Group } )
-
-    $GroupUserList[$GroupName] = $uniqueGroupUserList
+$UserList | % {
+    $_.OrgUnit = "fr.exia"
 }
 
-$GroupUserList.GetEnumerator() | % {
-    Write-Host "-------------------------$($_.Key)--------------------------"
-    Write-Host " - $($_.Value.Name)"
-}
+$UserList | ForEach-Object {
+    New-Object PSObject -Property $_
+   } | Export-Csv -Path "./outputExia.csv" -Encoding "UTF8" -Delimiter ";" -NoTypeInformation
+
