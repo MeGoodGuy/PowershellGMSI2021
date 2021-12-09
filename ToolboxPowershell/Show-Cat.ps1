@@ -40,4 +40,4 @@ function global:Show-Cat {
 }
 
 
-1..3 | % {Show-Cat}
+1..10 | % {Show-Cat}
