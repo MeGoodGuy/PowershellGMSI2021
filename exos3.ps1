@@ -3,6 +3,11 @@
 
 #Write-Host ${😃}
 
+
+# Operateurs ternaires  (selectionner la ligne & Press F8)
+(10 -gt 20) ? "vrai" : "faux"
+
+
 $UserList = @(
     @{ ID=1; Name="AAA"; Group="GMSI2020"; OrgUnit="fr.cesi.gmsi" },
     @{ ID=2; Name="BBB"; Group="GMSI2020"; OrgUnit="fr.cesi.gmsi" },
@@ -56,3 +61,4 @@ if (-not $GroupHash.ContainsKey("GMSI2025")) {
 $GroupHash["GMSI2025"] += @{ ID=5; Name="ZZZ"; Group="GMSI2025"; OrgUnit="fr.cesi.gmsi" }
 
 $GroupHash["GMSI2025"] | Out-String
+$GroupHash.GMSI2025 | Out-String
