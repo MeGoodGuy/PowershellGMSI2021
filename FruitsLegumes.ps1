@@ -20,17 +20,23 @@ $FruitLegumeList | ForEach-Object {
 
 
  # Trier les fruit /legumes par masse croissante
-
+$FruitLegumeList | Sort-Object -Descending -Property Masse | % {
+    Write-Host "$($_.Name) -- $($_.Masse)"
+}
 
 # N'afficher que les fruits
-
-
 # Afficher les noms des fruits avec leur masse respective
+$FruitLegumeList | ? { $_.Type -eq "Fruit" } | % {
+    #Write-Host "$($_.Name) -- $($_.Masse)"
+}
+
 
 
  # Remplir les listes suivantes :
  $FruitList = @()
  $LegumeList = @()
+
+
 
 
 
