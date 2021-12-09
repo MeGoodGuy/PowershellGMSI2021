@@ -35,23 +35,54 @@ exercice 24 - Écrire un programme qui affiche le plus petit nombre positif divi
 
 
 
+
+
+
 <#  Trouver les services qui sont démarré #>
+Get-Service
 <#  Afficher toutes les CMDLETs disponibles en PS #>
+Get-Help *
 <#  Afficher seulement les CMDLETs qui commence par Get #> 
+Get-Help "Get-*"
 <#  Trouver comment naviguer entre les répertoires en PS  #> 
+Get-Location
 <#  Trouver comment afficher le contenu du répertoire courant en PS #> 
+Get-ChildItem
 <#  Chercher sur votre OS tous les fichiers supérieur à 300 Mb #> 
+Get-ChildItem | ? { $_.Length -gt 1992 }
 <#  vous devez trouver tous les fichiers de plus de 300 Mb et les mettres dans un fichier .csv #> 
+Get-ChildItem | ? { $_.Length -gt 1992 } | % { $_.Name } | Out-File ./outputListFiles.csv 
 <#  Écrire un programme qui écrit 500 fois « Je dois faire des sauvegardes régulières de mes fichiers. » #> 
+
 <#  Écrire un programme qui affiche tous les nombres impairs entre 0 et 15000, par ordre croissant : « 1 3 5 7 ... 14995 14997 14999 » #> 
+
 <#  Écrire un programme qui affiche la table de multiplication par 13 #> 
+
 <#  Ecrire un programme qui demande un mot à l’utilisateur et qui affiche à l’écran le nombre de lettres de ce mot. #> 
+
 <#  Ecrire un programme qui demande un nombre entier à l’utilisateur. L’ordinateur affiche ensuite le message "Ce nombre est pair" ou "Ce nombre est impair" selon le cas. #> 
+
 <#  Ecrire un programme qui demande un nombre compris entre 10 et 20, jusqu’à ce que la réponse convienne. En cas de réponse supérieure à 20, on fera apparaître un message : « Plus petit ! », et inversement, « Plus grand ! » si le nombre est inférieur à 10.  #> 
+
 <#  Ecrire un programme qui demande un nombre de départ, et qui ensuite affiche les dix nombres suivants. Par exemple, si l'utilisateur entre le nombre 17, le programme affichera les nombres de 18 à 27.  #> 
 
 
 
+
+
+
+
+$UserList = @(
+    @{ ID=1; Name="AAA" },
+    @{ ID=2; Name="BBB" },
+    @{ ID=3; Name="CCC" },
+    @{ ID=4; Name="DDD" },
+    @{ ID=5; Name="EEE" },
+    @{ ID=6; Name="FFF" }
+)
+
+
+$UserList | ForEach-Object -Parallel
 
 
 
