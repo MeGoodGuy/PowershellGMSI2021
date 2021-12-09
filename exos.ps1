@@ -44,14 +44,27 @@ Get-Service
 Get-Help *
 <#  Afficher seulement les CMDLETs qui commence par Get #> 
 Get-Help "Get-*"
+Get-Command "Get-*"
 <#  Trouver comment naviguer entre les répertoires en PS  #> 
-Get-Location
+Get-Location / Set-Location
 <#  Trouver comment afficher le contenu du répertoire courant en PS #> 
-Get-ChildItem
+Get-ChildItem -Recurse
 <#  Chercher sur votre OS tous les fichiers supérieur à 300 Mb #> 
-Get-ChildItem | ? { $_.Length -gt 1992 }
+Get-ChildItem | ForEach-Object { $_.Length -gt 200 }
+Get-ChildItem | Where-Object { $_.Length -gt 15 }
+
+
 <#  vous devez trouver tous les fichiers de plus de 300 Mb et les mettres dans un fichier .csv #> 
-Get-ChildItem | ? { $_.Length -gt 1992 } | % { $_.Name } | Out-File ./outputListFiles.csv 
+Get-ChildItem | Where-Object { $_.Length -gt 15 } | ForEach-Object { $_.Name } | Out-File -FilePath "./output.csv"
+
+
+
+
+Get-ChildItem | Where-Object { $_.Length -gt 1992 } | ForEach-Object { $_.Name } | Out-File ./outputListFiles.csv 
+
+
+
+
 <#  Écrire un programme qui écrit 500 fois « Je dois faire des sauvegardes régulières de mes fichiers. » #> 
 
 <#  Écrire un programme qui affiche tous les nombres impairs entre 0 et 15000, par ordre croissant : « 1 3 5 7 ... 14995 14997 14999 » #> 
