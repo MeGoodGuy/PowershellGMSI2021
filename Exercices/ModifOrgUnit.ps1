@@ -16,7 +16,7 @@ $UserList | % {
     $_.OrgUnit = "fr.exia"
 }
 
-$UserList | ForEach-Object {
+$UserList | % {
     New-Object PSObject -Property $_
    } | Export-Csv -Path "./outputExia.csv" -Encoding "UTF8" -Delimiter ";" -NoTypeInformation
 
