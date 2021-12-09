@@ -1,2 +1,7 @@
-exos.ps1
-README.md
+"Group";"ID";"OrgUnit";"Name"
+"GMSI2020";"1";"fr.cesi.gmsi";"AAA"
+"GMSI2020";"2";"fr.cesi.gmsi";"BBB"
+"GMSI2020";"3";"fr.cesi.gmsi";"CCC"
+"GMSI2021";"4";"fr.cesi.gmsi";"DDD"
+"GMSI2021";"5";"fr.cesi.gmsi";"EEE"
+"GMSI2021";"6";"fr.cesi.gmsi";"FFF"
