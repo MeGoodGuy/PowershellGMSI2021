@@ -6,3 +6,6 @@ https://docs.microsoft.com/fr-fr/powershell/module/microsoft.powershell.core/abo
 
 la doc sur les Hastable (C#, powershell est écrit en C# et a donc accès à ses librairies)
 https://docs.microsoft.com/fr-fr/dotnet/api/system.collections.hashtable?view=net-6.0
+
+
+prendre la 3èm option (permet d'enlever certains warnings du PSScriptAnalyzer)
