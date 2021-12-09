@@ -1,17 +1,14 @@
-Function global:Invoke-WallixCommand {
+Function global:Open-BastionSCPTunnel {
     <#
     .Synopsis
     Connect to a server throught an SSH tunnel
-     
+    
     .Description
     Use this command to connect to a server throught an SSH tunnel
     #>
     
     [cmdletbinding()]
     Param(
-        [String]$CommandToSend = "cd /etc; ls;",
-        [ValidateSet("root@local@lololo:SSH","root@local@lololol-CentOS:SSH")]
-        [String]$ConnexionString = ""
     )
     
     begin { }
@@ -25,7 +22,7 @@ Function global:Invoke-WallixCommand {
             $wshell.AppActivate('Administrator: WinTerminal')
             Start-Sleep 2 | Out-Null
 
-            $mEncryptedPass = "lolololol"
+            $mEncryptedPass = "lololol"
             $mSecureStrSSH = ConvertTo-SecureString -String $mEncryptedPass
             $mPasswordSSH = ConvertFrom-SecureString -SecureString $mSecureStrSSH -AsPlainText
 
@@ -36,7 +33,7 @@ Function global:Invoke-WallixCommand {
         } | Out-Null
 
         
-        ssh user@10.202.194.22 -o ServerAliveInterval=60 $ConnexionString $CommandToSend | Out-String
+        ssh -L 8090:10.2.0.202:22 user@10.202.194.22 -o ServerAliveInterval=60 "root@local@lololol-CentOS:SSH" | Out-Null
 
 
 

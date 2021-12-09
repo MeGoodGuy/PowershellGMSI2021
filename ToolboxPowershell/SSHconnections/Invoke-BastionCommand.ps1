@@ -1,14 +1,17 @@
-Function global:Open-WallixTunnel {
+Function global:Invoke-BastionCommand {
     <#
     .Synopsis
     Connect to a server throught an SSH tunnel
-    
+     
     .Description
     Use this command to connect to a server throught an SSH tunnel
     #>
     
     [cmdletbinding()]
     Param(
+        [String]$CommandToSend = "cd /etc; ls;",
+        [ValidateSet("root@local@lololo:SSH","root@local@lololol-CentOS:SSH")]
+        [String]$ConnexionString = ""
     )
     
     begin { }
@@ -32,13 +35,14 @@ Function global:Open-WallixTunnel {
             $wshell.SendKeys('~')
         } | Out-Null
 
-        ssh -L 8081:127.0.0.1:80 user@10.202.194.22 -o ServerAliveInterval=60 "root@local@connectionName:RAWTCPIP" | Out-Null
+        
+        ssh user@10.202.194.22 -o ServerAliveInterval=60 $ConnexionString $CommandToSend | Out-String
 
 
 
         
         #$mThreadJob | Wait-Job
-        #New-PSSession -HostName user@10.202.194.22 "root@local@connectionName:SSH"
+        #New-PSSession -HostName sesa436300@10.202.194.22 "root@local@Grafana:SSH"
 
         #return $resultRequete
     }
