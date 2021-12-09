@@ -54,10 +54,13 @@ $GroupHash = @{
 
 $GroupHash.ContainsKey("GMSI2022")
 
+# Vérifier si mon Hash/Dict contient une certaine clef/key
 if (-not $GroupHash.ContainsKey("GMSI2025")) {
+    # Ajoute une liste vide @( ) dans mon Hash 'GroupHash', à l'index 'GMSI2025'
     $GroupHash.Add("GMSI2025", @())
 }
 
+# Ajouter un élément dans une liste
 $GroupHash["GMSI2025"] += @{ ID=5; Name="ZZZ"; Group="GMSI2025"; OrgUnit="fr.cesi.gmsi" }
 
 $GroupHash["GMSI2025"] | Out-String
