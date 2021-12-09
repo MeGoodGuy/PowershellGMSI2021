@@ -14,13 +14,14 @@ $UserList = @(
 
 
 
-$UserList | % { $_.Group } | Select-Object -Unique
+$UniqueUserGroups = $UserList | % { $_.Group } | Select-Object -Unique
 
 
 $GroupUserList = @{ }
 
-$UserList | % { $_.Group } | Select-Object -Unique | % { 
-    $GroupUserList[$_] = @( ) 
+$UniqueUserGroups | % {
+    $GroupName = $_
+    $GroupUserList[$GroupName] = @( ) 
 }
 
 $GroupUserList | Out-String
