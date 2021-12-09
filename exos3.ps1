@@ -46,3 +46,13 @@ $GroupHash = @{
 
 
 # https://docs.microsoft.com/fr-fr/dotnet/api/system.collections.hashtable.containskey?view=net-6.0
+
+$GroupHash.ContainsKey("GMSI2022")
+
+if (-not $GroupHash.ContainsKey("GMSI2025")) {
+    $GroupHash.Add("GMSI2025", @())
+}
+
+$GroupHash["GMSI2025"] += @{ ID=5; Name="ZZZ"; Group="GMSI2025"; OrgUnit="fr.cesi.gmsi" }
+
+$GroupHash["GMSI2025"] | Out-String
