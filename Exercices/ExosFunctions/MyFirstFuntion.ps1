@@ -4,7 +4,7 @@
 
 
 # Appuyer sur Ctrl+Spacebar, taper "function inline"
-function FunctionName ($OptionalParameters) {
+function MaFonction1 ($OptionalParameters) {
     
 }
 
@@ -14,7 +14,7 @@ function FunctionName ($OptionalParameters) {
 
 
 # Appuyer sur Ctrl+Spacebar, taper "function"
-function FunctionName {
+function MaFonction2 {
     param (
         $OptionalParameters = ""
     )
@@ -28,7 +28,7 @@ function FunctionName {
 
 
 # Appuyer sur Ctrl+Spacebar, taper "function advanced"
-function Verb-Noun {
+function MaFonction3 {
     [CmdletBinding()]
     param (
         
