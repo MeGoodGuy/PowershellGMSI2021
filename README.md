@@ -27,6 +27,7 @@ https://superuser.com/questions/1393186/how-to-disable-psscriptanalyzers-psavoid
 
 ---
 ### Le fichier PowershellProfile (equivalent de bashrc)
+https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_profiles?view=powershell-7
 
 https://superuser.com/questions/1393186/how-to-disable-psscriptanalyzers-psavoidusingcmdletaliases-in-powershell-extens
 
