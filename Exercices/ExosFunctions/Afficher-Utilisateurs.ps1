@@ -5,7 +5,14 @@ function Afficher-Utilisateur {
     [CmdletBinding()]
     param (
         
-        $GroupFilter
+        [ValidateNotNullOrEmpty()]
+        $GroupFilter = "*",
+
+        [ValidateNotNullOrEmpty()]
+        $OrgUnitFilter = "*",
+
+        [ValidateNotNullOrEmpty()]
+        $NameFilter = "*"
     )
     
     begin {
@@ -16,30 +23,31 @@ function Afficher-Utilisateur {
             @{ ID=4; Name="DDD"; Group="GMSI2021"; OrgUnit="fr.cesi.gmsi" },
             @{ ID=5; Name="EEE"; Group="GMSI2021"; OrgUnit="fr.cesi.gmsi" },
             @{ ID=5; Name="FFF"; Group="GMSI2021"; OrgUnit="fr.cesi.gmsi" },
-            @{ ID=5; Name="GGG"; Group="GMSI2022"; OrgUnit="fr.cesi.gmsi" },
-            @{ ID=6; Name="HHH"; Group="GMSI2022"; OrgUnit="fr.cesi.gmsi" }
+            @{ ID=6; Name="GGG"; Group="GMSI2022"; OrgUnit="fr.cesi.gmsi" },
+            @{ ID=7; Name="HHH"; Group="GMSI2022"; OrgUnit="fr.cesi.gmsi" },
+            @{ ID=8; Name="III"; Group="GMSI2020"; OrgUnit="fr.cesi.exia" },
+            @{ ID=9; Name="JJJ"; Group="GMSI2020"; OrgUnit="fr.cesi.exia" }
         )
     }
     
     process {
 
         Write-Host $GroupFilter
+        Write-Host $OrgUnitFilter
 
-        $UserList | ? { $_.Group -match $GroupFilter } | % {
-            # $_ | Out-String
-            Write-Host "  $($_.Name)  ---    $($_.Group)"
-        }
+        $UserList `
+            | ? { $_.Group -like $GroupFilter } `
+            | ? { $_.OrgUnit -like $OrgUnitFilter } `
+            | ? { $_.Name -like $NameFilter } `
+            | % {
+                # $_ | Out-String
+                Write-Host "  $($_.Name)  ---    $($_.Group)  ---    $($_.OrgUnit)"
+            }
 
-
-        
-    }
-    
-    end {
-        
     }
 }
 
 
 
-Afficher-Utilisateur -GroupFilter "GMSI202*"
+# Afficher-Utilisateur -GroupFilter "GMSI2020" -OrgUnitFilter "*exia*" -NameFilter "I*"
 
