@@ -39,3 +39,16 @@ git clone "https://github.com/MeGoodGuy/PowershellGMSI2021.git" ./
 ---
 ### About functions  --  Microsoft Doc
 https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_advanced?view=powershell-7.2
+
+
+---
+### Envoyer des requetes Web HTTP (equivalent de curl sur Linux)
+(Invoke-WebRequest -Uri "https://github.com/MeGoodGuy/PowershellGMSI2021/blob/main/Exercices/ExosFunctions/Afficher-Utilisateurs.ps1").RawContent
+
+
+---
+### Get-ADUser example - NOT WORKING
+https://social.technet.microsoft.com/wiki/contents/articles/32912.powershell-get-aduser-to-see-password-last-set-and-expiry-information-and-more.aspx
+    Get-ADUser -Filter "passwordlastset -lt '10/12/2019'" | % {
+        $_ | Set-ADUser -pas
+    }

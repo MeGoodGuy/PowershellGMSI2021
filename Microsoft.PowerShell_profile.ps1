@@ -8,3 +8,6 @@ $SourcedFolder = "./ToolboxPowershell"
 (Get-ChildItem -Path $SourcedFolder -Filter *.ps1 -Recurse) | % {
     # . $_.FullName
 }
+
+. .\Exercices\ExosFunctions\Afficher-Utilisateurs.ps1
+
