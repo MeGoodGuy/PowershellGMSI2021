@@ -12,7 +12,6 @@
                      'PSReservedCmdletChar',
                      'PSReservedParams',
                      'PSShouldProcess',
-                     'PSUseApprovedVerbs',
                      'PSUseDeclaredVarsMoreThanAssigments')
 
     # Do not analyze the following rules. Use ExcludeRules when you have
@@ -20,7 +19,7 @@
     # the default rules except for those you exclude below.
     # Note: if a rule is in both IncludeRules and ExcludeRules, the rule
     # will be excluded.
-    ExcludeRules = @('PSAvoidUsingAliases','PSAvoidUsingWriteHost','PSAvoidUsingCmdletAliases')
+    ExcludeRules = @('PSAvoidUsingAliases','PSAvoidUsingWriteHost','PSAvoidUsingCmdletAliases','PSUseApprovedVerbs')
 }
 
 

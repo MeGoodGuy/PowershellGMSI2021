@@ -1,9 +1,11 @@
 
 
 function Afficher-Utilisateur {
+
     [CmdletBinding()]
     param (
-        $Group = "GMSI*"
+        
+        $GroupFilter
     )
     
     begin {
@@ -21,11 +23,12 @@ function Afficher-Utilisateur {
     
     process {
 
+        Write-Host $GroupFilter
 
-
-
-
-
+        $UserList | ? { $_.Group -match $GroupFilter } | % {
+            # $_ | Out-String
+            Write-Host "  $($_.Name)  ---    $($_.Group)"
+        }
 
 
         
@@ -35,4 +38,8 @@ function Afficher-Utilisateur {
         
     }
 }
+
+
+
+Afficher-Utilisateur -GroupFilter "GMSI202*"
 

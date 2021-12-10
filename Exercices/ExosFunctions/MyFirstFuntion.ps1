@@ -4,11 +4,11 @@
 
 
 # Appuyer sur Ctrl+Spacebar, taper "function inline"
-function MaFonction1 ($OptionalParameters) {
-    
+function MaFonction1 ($Name) {
+    Write-Host "`n$Name"
 }
 
-
+MaFonction1
 
 
 
@@ -16,12 +16,16 @@ function MaFonction1 ($OptionalParameters) {
 # Appuyer sur Ctrl+Spacebar, taper "function"
 function MaFonction2 {
     param (
-        $OptionalParameters = ""
+        $Name = "",
+        $Group = "",
+        $Age = ""
     )
     
+    $Age.GetType()
+    Write-Host "`n$Name -- $Group -- $Age"
 }
 
-
+MaFonction2 -Name "Edouard" -Group "GMSI" -Age 29
 
 
 
