@@ -10,13 +10,10 @@ function Add-MyUser {
     param (
         [ValidateNotNullOrEmpty()]
         $ID,
-
         [ValidateNotNullOrEmpty()]
         $Name,
-
         [ValidateNotNullOrEmpty()]
         $Group,
-
         [ValidateNotNullOrEmpty()]
         $OrgUnit
     )
@@ -27,18 +24,16 @@ function Add-MyUser {
     }
     
     process {
-        # @{ ID=xxx; Name="xxx"; Group="xxx"; OrgUnit="xxx" }
-        $RetourAddedUsers = $UserList  #  +  Le nouvel User que vous créez vous-meme (doit respecter le format de la $UserList)
-        $RetourAddedUsers = $UserList + @{ }
+        $RetourAddedUsers = $UserList + @{ ID=$ID; Name="$Name"; Group="$Group"; OrgUnit="$OrgUnit" }
 
-        $RetourAddedUsers | % {
-            Write-Host "$($_.ID)  ---  $($_.Name)  ---    $($_.Group)  ---    $($_.OrgUnit)"
-        }
+        #$RetourAddedUsers | % {
+        #    Write-Host "$($_.ID)  ---  $($_.Name)  ---    $($_.Group)  ---    $($_.OrgUnit)"
+        #}
 
         return $RetourAddedUsers
     }
 }
 
 
-Add-MyUser | Out-Null
+# Add-MyUser -ID 11 -Name "Jojo" -Group "GMSI2022" -OrgUnit "fr.cesi.gmsi" | Out-Null
 
