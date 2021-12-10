@@ -31,7 +31,7 @@ function Add-MyUser {
         $RetourAddedUsers = $UserList  #  +  Le nouvel User que vous créez vous-meme (doit respecter le format de la $UserList)
         $RetourAddedUsers = $UserList + @{ }
 
-        $UserList | % {
+        $RetourAddedUsers | % {
             Write-Host "$($_.ID)  ---  $($_.Name)  ---    $($_.Group)  ---    $($_.OrgUnit)"
         }
 
@@ -39,4 +39,6 @@ function Add-MyUser {
     }
 }
 
+
+Add-MyUser | Out-Null
 
