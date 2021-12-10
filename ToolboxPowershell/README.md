@@ -9,11 +9,13 @@ https://4sysops.com/archives/powershell-remoting-over-https-with-a-self-signed-s
 Password = lollo!
 
 'Create-AdminUser'
+
     Mode = WORKGROUP
     user = olollol
     pass = ololollo!
 
 'SCONFIG'
+
     Telemetry = security
     Remore Management = Disabled
     Remote Desktop = Disabled
@@ -24,16 +26,18 @@ Password = lollo!
 ## Config WinRM  (Remote conections)
 
 'WinRM quickconfig'
+
     Configure service to allow remote requests
     Configure LocalAccountTokenFilterPolicy to grant admin rights remotely to local users
 
 
-Enable-PSRemoting
-Set-Item WSMan:\localhost\Client\TrustedHosts *
+    Enable-PSRemoting
+    Set-Item WSMan:\localhost\Client\TrustedHosts *
 
 ### Enable-Unencrypted-WSMan :
     on service the old fashion way : winrm set winrm/config/service '@{AllowUnencrypted="true"}'
 OR
+
     on client Powershell-style : Set-Item WSMan:\localhost\Client\AllowUnencrypted true
 
 ### Create-Certificate
@@ -48,6 +52,7 @@ OR
 ### Remove-Listeners :
     Get-ChildItem WSMan:\Localhost\listener | Where -Property Keys -eq "Transport=HTTP" | Remove-Item -Recurse
 OR
+
     Remove-Item -Path WSMan:\Localhost\listener\listener* -Recurse
 
 
@@ -58,7 +63,7 @@ OR
     New-NetFirewallRule -DisplayName "Windows Remote Management (HTTPS-In)" -Name "Windows Remote Management (HTTPS-In)" -Profile Any -LocalPort 5986 -Protocol TCP
 
 
-### - IF PORT 443 INSTEAD OF 5986 -
+### IF PORT 443 INSTEAD OF 5986 -
     Set-Item WSMan:\localhost\Service\EnableCompatibilityHttpsListener -Value true
     Set-NetConnectionProfile -NetworkCategory Private
 
@@ -71,12 +76,12 @@ OR
 ## ACTIVE DIRECTORY
 
 
-Install-WindowsFeature -Name "AD-Domain-Services"
-Get-WindowsFeature -Name "AD-Domain-Services"
-Add-WindowsFeature -Name "AD-Domain-Services" -IncludeManagementTools -IncludeAllSubFeature
+    Install-WindowsFeature -Name "AD-Domain-Services"
+    Get-WindowsFeature -Name "AD-Domain-Services"
+    Add-WindowsFeature -Name "AD-Domain-Services" -IncludeManagementTools -IncludeAllSubFeature
 
-Import-Module ADDSDeployment
-Install-ADDSForest
+    Import-Module ADDSDeployment
+    Install-ADDSForest
 
 
 
