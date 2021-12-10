@@ -1,3 +1,5 @@
+
+
 https://4sysops.com/archives/powershell-remoting-over-https-with-a-self-signed-ssl-certificate/
 
 ___________________________ INSTALL _______________________________
@@ -17,7 +19,7 @@ Password = lollo!
     Download updates = All
 
 
-___________________________ CONFIG _______________________________
+# ________________________________ CONFIG _______________________________
 
 'WinRM quickconfig'
     Configure service to allow remote requests
@@ -64,7 +66,7 @@ Remove-HTTP-FirewellRule :
 
 
 
-__________________________ ACTIVE DIRECTORY __________________________
+# _________________________________ ACTIVE DIRECTORY __________________________
 
 
 Install-WindowsFeature -Name "AD-Domain-Services"
