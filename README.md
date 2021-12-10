@@ -36,3 +36,6 @@ https://superuser.com/questions/1393186/how-to-disable-psscriptanalyzers-psavoid
 git clone "https://github.com/MeGoodGuy/PowershellGMSI2021.git" ./
 
 
+---
+### About functions  --  Microsoft Doc
+https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_functions_advanced?view=powershell-7.2
