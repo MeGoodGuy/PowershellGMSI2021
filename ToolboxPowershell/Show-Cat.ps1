@@ -9,6 +9,7 @@ function global:Show-Cat {
     $proxy = [System.Net.WebRequest]::GetSystemWebproxy().GetProxy('http://thecatapi.com/')
     $settings = @{}
 
+    # Activate when behind proxy
     #if ($proxy.AbsoluteUri -ne 'http://thecatapi.com/') {
     #    $Settings['ProxyUseDefaultCredentials'] = $true
     #    $Settings['Proxy'] = $proxy.AbsoluteUri
