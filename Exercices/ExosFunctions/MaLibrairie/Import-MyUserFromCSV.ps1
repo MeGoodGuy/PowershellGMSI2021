@@ -18,10 +18,10 @@ function Import-MyUserToCSV {
     
     process {
 
-        # Export-CSV ?
+        # $RetourCommand = Import-CSV ?
 
 
-        return $True
+        return $RetourCommand
     }
 }
 
