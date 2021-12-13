@@ -4,18 +4,14 @@ function global:DotSource-ToPSSession {
     param (
         
         [ref]$Session,
-
         $RemoteIPAddress = "172.25.20.189"
 
     )
-    
-
 
     begin {
         if(-Not $Session.Value) {
             $Session.Value = New-PSSession -ComputerName $RemoteIPAddress -UseSSL -Credential (Get-Credential)
         }
-        
     }
     
     process {

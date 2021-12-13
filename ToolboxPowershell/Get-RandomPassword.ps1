@@ -120,4 +120,4 @@ Function global:Get-RandomArrayWithFullCount([char[]]$pArray, [int]$pCount) {
 
 
 
-Get-RandomPassword -Length 52 -NbCapital 22 -NbDigit 12 -NbSpecChar 21 -AsPlainText
+# Get-RandomPassword -Length 52 -NbCapital 22 -NbDigit 12 -NbSpecChar 21 -AsPlainText
