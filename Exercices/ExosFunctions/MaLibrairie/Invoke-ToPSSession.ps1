@@ -1,5 +1,5 @@
 
-function global:DotSource-ToPSSession {
+function global:Invoke-ToPSSession {
     [CmdletBinding()]
     param (
         
@@ -16,14 +16,16 @@ function global:DotSource-ToPSSession {
     
     process {
         # Invoking the content of the file in the remote PSSession
-        Get-ChildItem ".\Exercices\ExosFunctions\MaLibrairie" | % {
-            $ScriptContent = (Get-Command $_.FullName).ScriptContents
-            Invoke-Command -Session $Session.Value -ArgumentList $ScriptContent -ScriptBlock {
-                param($ScriptContent)
-                Invoke-Expression $ScriptContent
-            }
+        Get-ChildItem ".\Exercices\ExosFunctions\MaLibrairie"
+            | ? { $_ -NotContains "Invoke-ToPSSession.ps1" }
+            | % {
+                Write-Host "`n$_"
+                $ScriptContent = (Get-Command "$_").ScriptContents
+                Invoke-Command -Session $Session.Value -ArgumentList $ScriptContent -ScriptBlock {
+                    param($ScriptContent)
+                    Invoke-Expression $ScriptContent
+                }
         }
-
         
 
 
@@ -50,5 +52,5 @@ function global:DotSource-ToPSSession {
 }
 
 $global:PSSessionAD
-DotSource-ToPSSession -Session ([ref]$PSSessionAD)
+Invoke-ToPSSession -Session ([ref]$PSSessionAD)
 

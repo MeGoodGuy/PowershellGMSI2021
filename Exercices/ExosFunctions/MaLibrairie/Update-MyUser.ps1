@@ -52,5 +52,5 @@ function Update-MyUser {
 
 
 
-Update-MyUser -GroupFilter "GMSI2022" -ID 11 -Name "Jojo" -Group "GMSI2022" -OrgUnit "fr.cesi.gmsi" 
+# Update-MyUser -GroupFilter "GMSI2022" -ID 11 -Name "Jojo" -Group "GMSI2022" -OrgUnit "fr.cesi.gmsi" 
 
