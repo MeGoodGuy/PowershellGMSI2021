@@ -53,3 +53,10 @@ https://social.technet.microsoft.com/wiki/contents/articles/32912.powershell-get
     Get-ADUser -Filter "passwordlastset -lt '10/12/2019'" | % {
         $_ | Set-ADUser -pas
     }
+
+
+
+---
+### Dockerfile example
+https://gist.github.com/brettmillerb/fa4c18be41acc69cc19f97ad9899d2c3
+

@@ -119,7 +119,9 @@ Function global:ConvertFrom-ExcelFile {
             $nbEmptyRowsStraight = 0
 
             #StartingRow et EndingRow sont spécifiés par l'utilisateur, le nbRows c'est le max disponible d'après Excel, puis nbEmptyRowsStraight c'est le nombre max de lignes vides avant de sortir
-            for ($row = $StartingRow; ($row -le $EndingRow) -And ($row -le $NbRows) -And ($nbEmptyRowsStraight -lt $MaxEmptyRowsBeforeStop); $row++) {
+            for ($row = $StartingRow; ($row -le $EndingRow) `
+                                        -And ($row -le $NbRows) `
+                                        -And ($nbEmptyRowsStraight -lt $MaxEmptyRowsBeforeStop); $row++) {
                 
                 Try {
                     #J'ajoute la hashtable contenant les données d'une ligne à la liste ExcelDataArray qui sera retournée à l'utlisateur

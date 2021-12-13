@@ -44,7 +44,7 @@ function Update-MyUser {
 
         $RetourFilteredUsers | % {
             Write-Host $_.Name
-            # Mettre a jour les user concernés
+            # Mettre a jour les user concernés (avec les variables $ID,$Name,$Group,$OrgUnit)
         }
     }
 }
@@ -53,3 +53,4 @@ function Update-MyUser {
 
 
 Update-MyUser -GroupFilter "GMSI2022" -ID 11 -Name "Jojo" -Group "GMSI2022" -OrgUnit "fr.cesi.gmsi" 
+

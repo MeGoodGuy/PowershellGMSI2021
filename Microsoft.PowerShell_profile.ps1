@@ -9,5 +9,5 @@ $SourcedFolder = "./ToolboxPowershell"
     # . $_.FullName
 }
 
-. .\Exercices\ExosFunctions\Afficher-Utilisateurs.ps1
+# . .\Exercices\ExosFunctions\Afficher-Utilisateurs.ps1
 

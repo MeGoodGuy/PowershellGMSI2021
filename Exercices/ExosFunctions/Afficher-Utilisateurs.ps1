@@ -35,6 +35,8 @@ function Afficher-Utilisateur {
         Write-Host $GroupFilter
         Write-Host $OrgUnitFilter
 
+
+
         $UserList `
             | ? { $_.Group -like $GroupFilter } `
             | ? { $_.OrgUnit -like $OrgUnitFilter } `
@@ -49,5 +51,7 @@ function Afficher-Utilisateur {
 
 
 
-# Afficher-Utilisateur -GroupFilter "GMSI2020" -OrgUnitFilter "*exia*" -NameFilter "I*"
+Write-Host "Hello from Affricher-Urilisateur (bashrc, powershellProfile)"
+
+ Afficher-Utilisateur -GroupFilter "GMSI2020" -OrgUnitFilter "*exia*" #-NameFilter ""
 
