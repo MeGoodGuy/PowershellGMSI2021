@@ -6,39 +6,38 @@ https://4sysops.com/archives/powershell-remoting-over-https-with-a-self-signed-s
 
 ## Installation
 
-Password = lollo!
+    'Create-AdminUser'
+        Mode = WORKGROUP
+        user = olollol
+        pass = ololollo!
 
-'Create-AdminUser'
-
-    Mode = WORKGROUP
-    user = olollol
-    pass = ololollo!
-
-'SCONFIG'
-
-    Telemetry = security
-    Remore Management = Disabled
-    Remote Desktop = Disabled
-    Update = Manual
-    Download updates = All
+    'SCONFIG'
+        Telemetry = security
+        Remore Management = Disabled
+        Remote Desktop = Disabled
+        Update = Manual
+        Download updates = All
 
 
 ## Config WinRM  (Remote conections)
 
-'WinRM quickconfig'
+    WinRM quickconfig
 
-    Configure service to allow remote requests
+
+ -> Si vous avez déjà accès au serveur, passez directement à "Create-Certificate"
+Configure service to allow remote requests
     Configure LocalAccountTokenFilterPolicy to grant admin rights remotely to local users
 
 
-    Enable-PSRemoting
+Enable-PSRemoting
     Set-Item WSMan:\localhost\Client\TrustedHosts *
 
 ### Enable-Unencrypted-WSMan :
-    on service the old fashion way : winrm set winrm/config/service '@{AllowUnencrypted="true"}'
-OR
+on service the old fashion way
+    winrm set winrm/config/service '@{AllowUnencrypted="true"}'
 
-    on client Powershell-style : Set-Item WSMan:\localhost\Client\AllowUnencrypted true
+on client Powershell-style
+    Set-Item WSMan:\localhost\Client\AllowUnencrypted true
 
 ### Create-Certificate
     $Cert = New-SelfSignedCertificate -CertstoreLocation Cert:\LocalMachine\My -DnsName "192.168.61.129"
