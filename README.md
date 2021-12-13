@@ -46,17 +46,8 @@ https://docs.microsoft.com/en-us/powershell/module/microsoft.powershell.core/abo
     (Invoke-WebRequest -Uri "https://github.com/MeGoodGuy/PowershellGMSI2021/blob/main/Exercices/ExosFunctions/Afficher-Utilisateurs.ps1").RawContent
 
 
----
-### Get-ADUser example - NOT WORKING
-https://social.technet.microsoft.com/wiki/contents/articles/32912.powershell-get-aduser-to-see-password-last-set-and-expiry-information-and-more.aspx
-
-    Get-ADUser -Filter "passwordlastset -lt '10/12/2019'" | % {
-        $_ | Set-ADUser -pas
-    }
-
-
 
 ---
-### Dockerfile example
+### Dockerfile example (Powershell installation on windowsServer:lts2019)
 https://gist.github.com/brettmillerb/fa4c18be41acc69cc19f97ad9899d2c3
 

@@ -22,9 +22,9 @@ function Export-MyUserToAD {
     process {
 
         # Example d'utilisation de GetOrCreate
-        $Name = "AAAA"
-        $mUser = GetOrCreate-ADUser -Path "OU=rouge,DC=fr,DC=cesi,DC=gmsi" -Name $Name
-        $mUser | Out-String
+        #$Name = "AAAA"
+        #$mUser = GetOrCreate-ADUser -Path "OU=rouge,DC=fr,DC=cesi,DC=gmsi" -Name $Name
+        #$mUser | Out-String
 
         # Afficher la liste des utilisateurs
         #$UserList | % {
@@ -34,8 +34,19 @@ function Export-MyUserToAD {
         
         # Objectif N°1
         # Exporter la $UserList sur l'AD
-        # /!\ J'ai ajouté l'attribut "City" (à spécifier également dans l'AD)
+        # /!\ J'ai ajouté l'attribut "City" (à spécifier également dans l'AD
 
+        # creating OrgUnits
+        $UniqueOrgUnit = $UserList | % { $_.OrgUnit } | Select-Object -Unique
+        $UniqueOrgUnit | % {
+            GetOrCreate-ADOrganizationalUnit -Name $_.Name -Path $BaseDN
+        }
+
+        # creating users
+        $UserList | % {
+            $OUpath = "OU="+$_.OrgUnit+","+$BaseDN
+            GetOrCreate-ADUser -Name $_.Name -Path $OUpath $_.City
+        }
         
         # Objectif N°2
         # Récupérer la liste des Users depuis l'AD et tout sauvegarder tous les attributs dans un CSV
@@ -90,7 +101,7 @@ Function GetOrCreate-ADGroup($Name, $Path) {
     return $mADGroup
 }
 
-Function GetOrCreate-ADUser($Name, $Path, $Password) {
+Function GetOrCreate-ADUser($Name, $Path, $City, $Password) {
     $filterStr = "Name -eq `"$Name`""
     $mADUser = Get-ADUser -SearchBase $Path -SearchScope OneLevel -Filter $filterStr
 
@@ -100,7 +111,7 @@ Function GetOrCreate-ADUser($Name, $Path, $Password) {
             $Password = Get-RandomPassword -Length 24 -NbCapital 3 -NbDigit 3 -NbSpecChar 3 -AsPlainText
         }
 
-        $mADuser = New-ADUser -Name $Name -Path $Path -AccountPassword (ConvertTo-SecureString $Password -AsPlainText -Force) -Enabled $True
+        $mADuser = New-ADUser -Name $Name -Path $Path -City $City -AccountPassword (ConvertTo-SecureString $Password -AsPlainText -Force) -Enabled $True
 
     } else { # Updating ADUser 
         if($Password) {
@@ -151,5 +162,5 @@ Function Add-GroupsToADUser($Name, $Path, $GroupListToAdd) {
 
 
 
-Export-MyUserToAD
+# Export-MyUserToAD
 

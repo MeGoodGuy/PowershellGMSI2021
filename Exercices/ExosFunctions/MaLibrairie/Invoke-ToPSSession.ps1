@@ -28,7 +28,10 @@ function global:Invoke-ToPSSession {
         }
 
         
-        Invoke-Command -FilePath $FileToInvokePath -Session $Session.Value
+        #Invoke-Command -FilePath $FileToInvokePath -Session $Session.Value
+        Invoke-Command -Session $Session.Value -ScriptBlock {
+            Export-MyUserToAD
+        }
     }
     
     end {
