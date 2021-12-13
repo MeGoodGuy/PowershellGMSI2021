@@ -16,16 +16,16 @@ function global:DotSource-ToPSSession {
     
     process {
         # Invoking the content of the file in the remote PSSession
-        $ScriptContent = (Get-Command ".\Exercices\ExosFunctions\MaLibrairie\UserList.ps1").ScriptContents
-        Invoke-Command -Session $Session.Value -ArgumentList $ScriptContent -ScriptBlock {
-            param($ScriptContent)
-            Invoke-Expression $ScriptContent
+        Get-ChildItem ".\Exercices\ExosFunctions\MaLibrairie" | % {
+            $ScriptContent = (Get-Command $_.FullName).ScriptContents
+            Invoke-Command -Session $Session.Value -ArgumentList $ScriptContent -ScriptBlock {
+                param($ScriptContent)
+                Invoke-Expression $ScriptContent
+            }
         }
-        $ScriptContent = (Get-Command ".\ToolboxPowershell\Get-RandomPassword.ps1").ScriptContents
-        Invoke-Command -Session $Session.Value -ArgumentList $ScriptContent -ScriptBlock {
-            param($ScriptContent)
-            Invoke-Expression $ScriptContent
-        }
+
+        
+
 
 
         Invoke-Command -FilePath ".\Exercices\ExosFunctions\MaLibrairie\Export-MyUserToAD.ps1" -Session $Session.Value
