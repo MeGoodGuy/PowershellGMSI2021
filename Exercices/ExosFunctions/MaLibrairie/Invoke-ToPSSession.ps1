@@ -4,7 +4,8 @@ function global:Invoke-ToPSSession {
     param (
         
         [ref]$Session,
-        $RemoteIPAddress = "172.25.20.189"
+        $FolderPathList,
+        $FileToInvokePath
 
     )
 
@@ -12,35 +13,22 @@ function global:Invoke-ToPSSession {
     }
     
     process {
-        # Invoking the content of the file in the remote PSSession
-        Get-ChildItem ".\Exercices\ExosFunctions\MaLibrairie"
-            | ? { $_ -NotContains "Invoke-ToPSSession.ps1" }
-            | % {
-                #Write-Host "`n$_"
-                $ScriptContent = (Get-Command "$_").ScriptContents
-                Invoke-Command -Session $Session.Value -ArgumentList $ScriptContent -ScriptBlock {
-                    param($ScriptContent)
-                    Invoke-Expression $ScriptContent
-                }
+        foreach($PathToLoad in $FolderPathList) {
+            # Invoking the content of the file in the remote PSSession
+            Get-ChildItem "$PathToLoad"
+                | ? { $_ -NotContains "Invoke-ToPSSession.ps1" }
+                | % {
+                    #Write-Host "`n$_"
+                    $ScriptContent = (Get-Command "$_").ScriptContents
+                    Invoke-Command -Session $Session.Value -ArgumentList $ScriptContent -ScriptBlock {
+                        param($ScriptContent)
+                        Invoke-Expression $ScriptContent
+                    }
+            }
         }
+
         
-
-
-
-        Invoke-Command -FilePath ".\Exercices\ExosFunctions\MaLibrairie\Export-MyUserToAD.ps1" -Session $Session.Value
-
-        # Write-Host $Session.Value
-        
-
-
-
-
-
-
-
-
-
-
+        Invoke-Command -FilePath $FileToInvokePath -Session $Session.Value
     }
     
     end {
@@ -48,9 +36,10 @@ function global:Invoke-ToPSSession {
     }
 }
 
+
 $global:PSSessionAD
 if(-Not $PSSessionAD) {
     $PSSessionAD = New-PSSession -ComputerName "172.25.20.189" -UseSSL -Credential (Get-Credential)
 }
-Invoke-ToPSSession -Session ([ref]$PSSessionAD)
+Invoke-ToPSSession -Session ([ref]$PSSessionAD) -FolderPathList ".\Exercices\ExosFunctions\MaLibrairie" -FileToInvokePath ".\Exercices\ExosFunctions\MaLibrairie\Export-MyUserToAD.ps1"
 
