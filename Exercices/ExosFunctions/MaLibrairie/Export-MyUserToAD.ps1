@@ -24,19 +24,25 @@ function Export-MyUserToAD {
     
     process {
 
+        $Name = "AAAA"
+        $mUser = GetOrCreate-ADUser -Path "OU=rouge,DC=fr,DC=cesi,DC=gmsi" -Name $Name
+        $mUser | Out-String
+        #$UserList | % {
+        #    $_ | Out-String
+        #}
 
-        #$UserList | % {
-        #    Write-Host "$($_.OrgUnit)  -- $((GetOrCreate-ADOrganizationalUnit -Name $_.OrgUnit -Path $BaseDN).ObjectGUID) "
-        #}
-        #$UserList | % {
-        #    Write-Host "$($_.Name)  -- $((GetOrCreate-ADUser -Name $_.Name -Path "OU=$($_.OrgUnit),$BaseDN").ObjectGUID) "
-        #}
-        #$UserList | % {
-        #    Write-Host "$($_.Group)  -- $((GetOrCreate-ADGroup -Name $_.Group -Path "OU=$($_.OrgUnit),$BaseDN").ObjectGUID) "
-        #}
-        #$UserList | % {
-        #    Write-Host (Add-GroupsToADUser -Name $_.Name -Path "OU=$($_.OrgUnit),$BaseDN" -GroupListToAdd @($_.Group))
-        #}
+        $UserList | % {
+            Write-Host "$($_.OrgUnit)  -- $((GetOrCreate-ADOrganizationalUnit -Name $_.OrgUnit -Path $BaseDN).ObjectGUID) "
+        }
+        $UserList | % {
+            Write-Host "$($_.Name)  -- $((GetOrCreate-ADUser -Name $_.Name -Path "OU=$($_.OrgUnit),$BaseDN").ObjectGUID) "
+        }
+        $UserList | % {
+            Write-Host "$($_.Group)  -- $((GetOrCreate-ADGroup -Name $_.Group -Path "OU=$($_.OrgUnit),$BaseDN").ObjectGUID) "
+        }
+        $UserList | % {
+            Write-Host (Add-GroupsToADUser -Name $_.Name -Path "OU=$($_.OrgUnit),$BaseDN" -GroupListToAdd @($_.Group))
+        }
 
         #$PSSessionAD = New-PSSession -ComputerName "172.25." -UseSSL -Credential (Get-Credential)
         #Invoke-Command -FilePath ".\Exercices\ExosFunctions\MaLibrairie\Export-MyUserToAD.ps1" -Session (Get-PSSession | ? {$_.Id -eq 1})
@@ -61,13 +67,14 @@ function Export-MyUserToAD {
 ################################################################################################################################
 ####################################################_GET_OR_CREATE_#############################################################
 ################################################################################################################################
+# Set-ADOrganizationalUnit -Identity $_.ObjectGUID -ProtectedFromAccidentalDeletion $false
 Function GetOrCreate-ADOrganizationalUnit($Name, $Path) {
     $filterStr = "Name -eq `"$Name`""
     $mADOrgUnit = Get-ADOrganizationalUnit -SearchBase $Path -SearchScope OneLevel -Filter $filterStr
     
     if(-Not $mADOrgUnit) {
         Write-Host "l'OU $Name n'existe pas, tentative de création ..."
-        $mADOrgUnit = New-ADOrganizationalUnit -Name $Name -Path $Path
+        $mADOrgUnit = New-ADOrganizationalUnit -Name $Name -Path $Path -ProtectedFromAccidentalDeletion $False
     }
 
     return $mADOrgUnit

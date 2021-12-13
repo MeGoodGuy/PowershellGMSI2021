@@ -19,7 +19,7 @@ function global:Invoke-ToPSSession {
         Get-ChildItem ".\Exercices\ExosFunctions\MaLibrairie"
             | ? { $_ -NotContains "Invoke-ToPSSession.ps1" }
             | % {
-                Write-Host "`n$_"
+                #Write-Host "`n$_"
                 $ScriptContent = (Get-Command "$_").ScriptContents
                 Invoke-Command -Session $Session.Value -ArgumentList $ScriptContent -ScriptBlock {
                     param($ScriptContent)
