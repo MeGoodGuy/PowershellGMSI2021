@@ -9,9 +9,6 @@ function global:Invoke-ToPSSession {
     )
 
     begin {
-        if(-Not $Session.Value) {
-            $Session.Value = New-PSSession -ComputerName $RemoteIPAddress -UseSSL -Credential (Get-Credential)
-        }
     }
     
     process {
@@ -52,5 +49,8 @@ function global:Invoke-ToPSSession {
 }
 
 $global:PSSessionAD
+if(-Not $PSSessionAD) {
+    $PSSessionAD = New-PSSession -ComputerName "172.25.20.189" -UseSSL -Credential (Get-Credential)
+}
 Invoke-ToPSSession -Session ([ref]$PSSessionAD)
 

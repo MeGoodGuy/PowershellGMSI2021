@@ -15,38 +15,37 @@ function Export-MyUserToAD {
     )
     
     begin {
-        # dot-sourcing (importe le ficher ps1 contenant ma liste $UserList)
-        # . "$PSScriptRoot\UserList.ps1"
-
-        # remote dot-sourcing
         
     }
     
+
     process {
 
+        # Example d'utilisation de GetOrCreate
         $Name = "AAAA"
         $mUser = GetOrCreate-ADUser -Path "OU=rouge,DC=fr,DC=cesi,DC=gmsi" -Name $Name
         $mUser | Out-String
+
+        # Afficher la liste des utilisateurs
         #$UserList | % {
         #    $_ | Out-String
         #}
 
-        $UserList | % {
-            Write-Host "$($_.OrgUnit)  -- $((GetOrCreate-ADOrganizationalUnit -Name $_.OrgUnit -Path $BaseDN).ObjectGUID) "
-        }
-        $UserList | % {
-            Write-Host "$($_.Name)  -- $((GetOrCreate-ADUser -Name $_.Name -Path "OU=$($_.OrgUnit),$BaseDN").ObjectGUID) "
-        }
-        $UserList | % {
-            Write-Host "$($_.Group)  -- $((GetOrCreate-ADGroup -Name $_.Group -Path "OU=$($_.OrgUnit),$BaseDN").ObjectGUID) "
-        }
-        $UserList | % {
-            Write-Host (Add-GroupsToADUser -Name $_.Name -Path "OU=$($_.OrgUnit),$BaseDN" -GroupListToAdd @($_.Group))
-        }
+        
+        # Objectif N°1
+        # Exporter la $UserList sur l'AD
+        # /!\ J'ai ajouté l'attribut "City" (à spécifier également dans l'AD)
 
-        #$PSSessionAD = New-PSSession -ComputerName "172.25." -UseSSL -Credential (Get-Credential)
-        #Invoke-Command -FilePath ".\Exercices\ExosFunctions\MaLibrairie\Export-MyUserToAD.ps1" -Session (Get-PSSession | ? {$_.Id -eq 1})
+        
+        # Objectif N°2
+        # Récupérer la liste des Users depuis l'AD et tout sauvegarder tous les attributs dans un CSV
 
+        
+        # Objectif N°3
+        # Forcer les utilisateurs de plus de 50 ans à spécifier un nouveau mot de passe à la prochaine utilisation
+
+
+        
     }
 }
 
@@ -107,6 +106,13 @@ Function GetOrCreate-ADUser($Name, $Path, $Password) {
         if($Password) {
             Write-Host "Updating AD User $Name password on domain $Path"
             Set-ADAccountPassword -Identity $mADuser.SID -Reset -NewPassword (ConvertTo-SecureString $Password -AsPlainText -Force)
+        }
+        else {
+            #$mADUser = Get-ADUser -SearchBase $Path -SearchScope OneLevel -Filter $filterStr -Properties City
+            #if(-Not $mADUser.City) {
+            #    Set-ADUser -Identity $mADuser.SID -City "Paris"
+            #    Set-ADUser -Identity $mADuser.SID -Replace @{ City="Paris" }
+            #}
         }
     }
 
